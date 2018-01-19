@@ -38,27 +38,32 @@ Nginx host name
 ```
 NGINX_HOST=test.local
 ```
-Keymetrics accound credentials [optional]
+Keymetrics account credentials [optional]
 ```
 KEYMETRICS_PUBLIC=
 KEYMETRICS_SECRET=
 ```
+> https://keymetrics.io/
 
-PM@ server configurations and express hosting port
+PM2 server configurations and express hosting port
 ```
 SERVER_EXPRESS_PORT=3000
 SERVER_INSTANCES=1
 SERVER_WATCH=true
 ```
-Instances is used to 
+Instances is used to  
+
+Mongo DB host and port 
 
 ```
 ELECTRON_MONGO_HOST=db
-ELECTRON_MONGO_HOST=27017
+ELECTRON_MONGO_PORT=27017
+```
+GraphQL pretty print 
+
+```
 ELECTRON_PRETTY_QL=true
 ```
-
-
 
 ## Helpful aliases and commands
 
