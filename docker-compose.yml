@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+    db:
+        build:
+            context: '.docker/mongo'
+        environment:
+          - MONGODB_USER="root"
+          - MONGODB_PASS="root"
+        volumes:
+          - ./.docker/mongo-data:/data/db
+        ports:
+          - 27017:27017
+
+
+    node-cli:
+        build:
+            context: '.docker/pm2'
+        working_dir: /var/www
+        volumes:
+          - ./:/var/www
+        environment:
+          - ENV=$ENV
+          - KEYMETRICS_PUBLIC=$KEYMETRICS_PUBLIC
+          - KEYMETRICS_SECRET=$KEYMETRICS_SECRET
+        links:
+          - db
+        ports:
+          - 3000:3000
+
+    nginx:
+        build:
+            context: '.docker/nginx'
+        ports:
+          - 80:80
+          - 43554:43554
+          - 443:443
+        environment:
+          - NGINX_HOST=$NGINX_HOST
+        links:
+          - db
+          - node-cli

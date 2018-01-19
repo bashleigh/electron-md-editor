@@ -1,8 +1,33 @@
 Electron md editor
 ===
 
+A markdown document editor
+
 ## Install 
 
+Create an env file from the example
+
+```bash
+cp .env.example .env
+```
+
+Start the server 
+
+```bash
+docker-composer up -d
+```
+
+Start electron application 
+
+```bash
+electron .
+```
+
+> requires electron installed globally with `npm i -g electron`
+
+## Envs
+
+> Going to try to stick to prefixing with `server` and `electron` to specify which part the env is for.
 
 ## Todo
 
