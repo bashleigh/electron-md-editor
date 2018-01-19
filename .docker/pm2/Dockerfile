@@ -6,4 +6,4 @@ ARG APP_MONGO_PORT
 
 EXPOSE 3000
 
-CMD ["pm2-docker", "start", "app.js", "-i", "max"]
+CMD ["pm2-docker", "start", "app.config.js", "-i", "max"]

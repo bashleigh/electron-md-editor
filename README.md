@@ -51,7 +51,13 @@ SERVER_EXPRESS_PORT=3000
 SERVER_INSTANCES=1
 SERVER_WATCH=true
 ```
-Instances is used to  
+> Instances is used to managed your cluster processes http://pm2.keymetrics.io/docs/usage/cluster-mode/
+
+Secret used for JWT authentication
+
+```
+ELECTRON_SECRET=thisisthesecret
+```
 
 Mongo DB host and port 
 
