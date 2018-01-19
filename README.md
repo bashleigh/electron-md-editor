@@ -29,31 +29,42 @@ electron .
 
 > Going to try to stick to prefixing with `server` and `electron` to specify which part the env is for.
 
-## Todo
+ENV for conditions within both server and electron that might need differences between environments
+```
+ENV=development
+```
 
-- [ ] Create issue board of tasks and issue to project
-- [ ] Create issues that could arrise
-- [ ] Experiment with Auth0's authentication API
-- [ ] Write acceptance criteria
-- [ ] Write detailed readme
-- [ ] Write tutorials within wiki docs
-- [ ] Add Change log 
-- [ ] Document publishing elecrton app
+Nginx host name
+```
+NGINX_HOST=test.local
+```
+Keymetrics accound credentials [optional]
+```
+KEYMETRICS_PUBLIC=
+KEYMETRICS_SECRET=
+```
+
+PM@ server configurations and express hosting port
+```
+SERVER_EXPRESS_PORT=3000
+SERVER_INSTANCES=1
+SERVER_WATCH=true
+```
+Instances is used to 
+
+```
+ELECTRON_MONGO_HOST=db
+ELECTRON_MONGO_HOST=27017
+ELECTRON_PRETTY_QL=true
+```
 
 
-## Server 
-- [ ] Create docker image for server using pm2 
-- [ ] Create GQL server 
-- [ ] Add mongodb to GQL
-- [ ] Add Auth0 to GQL server
-- [ ] Create GQL Schema
-- [ ] Create database Schema
 
-## Electron 
-- [ ] Create main electron application
-- [ ] Add GQL client
-- [ ] Create editor page
-- [ ] Add editorial elements like text, list, h1, h2, h3, h4 etc
-- [ ] Add change log from md reader
+## Helpful aliases and commands
 
+Accessing the pm2 docker (there's no bash here)
 
+```bash
+alias dn="docker exec -it $(docker ps -f 'name='node-cli'' -q) "
+```
+You can use the above to access pm2 commands like so `dn pm2 logs`
