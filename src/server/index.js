@@ -1,5 +1,4 @@
 import express from 'express';
-import jwt from 'express-jwt';
 import graphqlHTTP from 'express-graphql';
 import dotenv from 'dotenv';
 
