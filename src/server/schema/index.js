@@ -28,7 +28,7 @@ export default new GraphQLSchema({
                     resolve: async (root, params, options, fieldASTs) => {
 
                         const projection = getProjection(fieldASTs);
-                        
+
                         const results = await UserModel.find()
                             .select(projection)
                             .exec();
