@@ -22,22 +22,26 @@ export default (db) => {
         },
     });
 
-    schema.pre('save', (next) => {
+    schema.pre('save', function (next) {
+
         if (!this.isModified('password')) return next();
 
         const user = this;
 
-        bcrypt.genSalt(10, (error, salt) => {
+        //TODO figure out why the below crashes?
+        bcrypt.genSalt(10, function(error, salt) {
+            console.log('bcrypt_error', error);
             if (error) return next(error);
 
-            bcrypt.hash(user.password, salt, (error, hash) => {
-
+            bcrypt.hash(user.password, salt, function(error, hash) {
+                console.log('bcrypt_error', error);
                 if (error) return next(error);
 
                 user.password = hash;
-                next();
+                return next();
             });
         });
+
     });
 
     schema.methods.comparePassword = (candidatePassword, cb) => {

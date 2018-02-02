@@ -62,8 +62,8 @@ ELECTRON_SECRET=thisisthesecret
 Mongo DB host and port 
 
 ```
-ELECTRON_MONGO_HOST=db
-ELECTRON_MONGO_PORT=27017
+SERVER_MONGO_HOST=db
+SERVER_MONGO_PORT=27017
 ```
 GraphQL pretty print 
 
