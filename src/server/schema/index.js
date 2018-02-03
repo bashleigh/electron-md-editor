@@ -8,11 +8,11 @@ import {
 
 import {
     projection as getProjection,
+    signUp,
 } from './../helpers';
 import jwt from 'jsonwebtoken';
 
 import {
-    user as UserModel,
     document as DocumentModel,
 } from './../db';
 
@@ -29,11 +29,7 @@ export default new GraphQLSchema({
                     type: new GraphQLList(userSchema),
                     resolve: async (root, params, options, fieldASTs) => {
 
-                        const projection = getProjection(fieldASTs);
-
-                        const results = await UserModel.find()
-                            .select(projection)
-                            .exec();
+                        //TODO get profile from Auth0
 
                         return results;
                     },
@@ -84,19 +80,9 @@ export default new GraphQLSchema({
                     },
                     resolve: async (root, params, options, fieldASTs) => {
 
-                        const user = new UserModel({
-                            firstname: params.input.firstname,
-                            lastname: params.input.lastname,
-                            email: params.input.email,
-                            password: params.input.password,
-                        });
+                        const user = await signUp(params.input.email, params.input.password);
 
-                        user.save();
-
-                        user.jwt = jwt.sign({
-                            id: user.id,
-                            email: user.email,
-                        }, process.env.SERVER_JWT_SECRET);
+                        console.log('user in schema: ', user);
 
                         return user;
                     },
@@ -121,19 +107,7 @@ export default new GraphQLSchema({
                     },
                     resolve: async (root, params, options, fieldsASTs) => {
 
-                        const user = await UserModel.findOne({
-                            where: {
-                                email: params.input.email,
-                            },
-                        }).then((user) => {
-                            if (!user) return Promise.reject('password incorrect');
-
-                            return user.comparePassword(params.input.password);
-                        });
-
-                        if (!user) {
-                            return 'incorrect password';
-                        }
+                        //TODO login with auth0
 
                         user.jwt = jwt.sign({
                             id: user.id,
