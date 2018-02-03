@@ -5,6 +5,8 @@ import {
 const auth = new AuthenticationClient({
     domain: process.env.SERVER_AUTH0_DOMAIN,
     clientID: process.env.SERVER_AUTH0_CLIENTID,
+    clientSecret: process.env.SERVER_AUTH0_SECRET,
+
 });
 
 export async function signUp (email, password, meta = {}) {
@@ -17,3 +19,22 @@ export async function signUp (email, password, meta = {}) {
     });
 
 };
+
+export async function login (email, password) {
+
+    return await auth.database.signIn({
+        connection: 'Username-Password-Authentication',
+        username: email,
+        password: password,
+    }, (error, user) => {
+        if (error) console.error(error);
+
+        console.log('user', user);
+
+        return user;
+    });
+};
+
+export async function getMe (id) {
+
+}

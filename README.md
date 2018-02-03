@@ -39,11 +39,13 @@ Nginx host name
 NGINX_HOST=test.local
 ```
 Keymetrics account credentials [optional]
+> This is more for deployment and server monitoring etc
+
 ```
 KEYMETRICS_PUBLIC=
 KEYMETRICS_SECRET=
 ```
-> https://keymetrics.io/
+See [Keymetrics](https://keymetrics.io/) for more.
 
 PM2 server configurations and express hosting port
 ```
@@ -56,7 +58,8 @@ SERVER_WATCH=true
 Secret used for JWT authentication
 
 ```
-ELECTRON_SECRET=thisisthesecret
+#JWT secret
+SERVER_JWT_SECRET=thisissoooosecret
 ```
 
 Mongo DB host and port 
@@ -68,7 +71,16 @@ SERVER_MONGO_PORT=27017
 GraphQL pretty print 
 
 ```
-ELECTRON_PRETTY_QL=true
+#GraphQL pretty
+SERVER_PRETTY_QL=true
+```
+Auth0 credentials 
+
+```
+#Auth0 Credentials
+SERVER_AUTH0_DOMAIN=
+SERVER_AUTH0_CLIENTID=
+SERVER_AUTH0_SECRET=
 ```
 
 ## Helpful aliases and commands

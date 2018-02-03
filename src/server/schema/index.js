@@ -9,6 +9,7 @@ import {
 import {
     projection as getProjection,
     signUp,
+    login,
 } from './../helpers';
 import jwt from 'jsonwebtoken';
 
@@ -18,7 +19,6 @@ import {
 
 import userSchema from './user';
 import documentSchema from './document';
-import authSchema from './auth';
 
 export default new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -99,7 +99,7 @@ export default new GraphQLSchema({
                     },
                 },
                 login: {
-                    type: authSchema,
+                    type: userSchema,
                     args: {
                         input: {
                             type: new GraphQLInputObjectType({
@@ -119,6 +119,12 @@ export default new GraphQLSchema({
                     resolve: async (root, params, options, fieldsASTs) => {
 
                         //TODO login with auth0
+
+                        console.log(login);
+
+                        const user = await login(params.input.email, params.input.password);
+
+                        console.log('login', user);
 
                         user.jwt = jwt.sign({
                             id: user.id,
