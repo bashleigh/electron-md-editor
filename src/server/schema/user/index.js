@@ -24,9 +24,9 @@ export default new GraphQLObjectType({
             type: GraphQLString,
             description: 'The email address of the user',
         },
-        password: {
+        jwt: {
             type: GraphQLString,
-            description: 'The password of the user',
+            description: 'The JWT of the user',
         },
     }),
 });

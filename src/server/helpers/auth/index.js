@@ -7,12 +7,13 @@ const auth = new AuthenticationClient({
     clientID: process.env.SERVER_AUTH0_CLIENTID,
 });
 
-export async function signUp (email, password) {
+export async function signUp (email, password, meta = {}) {
 
     return await auth.database.signUp({
         connection: 'Username-Password-Authentication',
         email: email,
         password: password,
+        user_metadata: meta,
     });
 
 };

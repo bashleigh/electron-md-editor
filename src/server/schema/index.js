@@ -80,9 +80,20 @@ export default new GraphQLSchema({
                     },
                     resolve: async (root, params, options, fieldASTs) => {
 
-                        const user = await signUp(params.input.email, params.input.password);
+                        const user = await signUp(params.input.email, params.input.password, {
+                            firstname: params.input.firstname,
+                            lastname: params.input.lastname,
+                        });
 
-                        console.log('user in schema: ', user);
+                        user.jwt = jwt.sign({
+                            id: user._id,
+                            email: user.email,
+                        }, process.env.SERVER_JWT_SECRET);
+
+                        user.firstname = user.user_metadata.firstname;
+                        user.lastname = user.user_metadata.lastname;
+
+                        console.log('user', user);
 
                         return user;
                     },
